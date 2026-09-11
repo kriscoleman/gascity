@@ -415,8 +415,8 @@ var controlReadyCacheRegistry = struct {
 }{byDir: make(map[string]*controlReadyCacheEntry)}
 
 // controlReadyCacheEntry holds a primed snapshot per leg for one scope dir.
-// Its backing stores are closed the instant PrimeActive returns (see
-// controlReadyCachesFor), so an entry is a set of CLOSED-backing snapshots: it
+// Its backing stores are closed when controlReadyCachesFor returns, once every
+// leg has primed, so an entry is a set of CLOSED-backing snapshots: it
 // may only be read through CachingStore.CachedReady, which answers entirely from
 // the in-memory snapshot. Any read that would need to touch the backing must
 // decline to controlReadyFallbackReady instead of consulting a closed handle.
